@@ -1,0 +1,9 @@
+﻿<div class="input-group">
+    <input [name]="name" #mydate="ngModel" matInput [matDatepicker]="id" placeholder="Choose a date..." class="form-control" [ngModel]="dateTime" (ngModelChange)="dateChange($event)"
+           [disabled]="readOnly" style="height:auto;border: 1px solid #ced4da;padding: .375rem .75rem; margin:0;" />
+        <span class="input-group-text" style="padding:0px;">
+            <mat-datepicker-toggle matIconSuffix  [for]="id" [disabled]="readOnly"></mat-datepicker-toggle>
+        </span>
+</div>
+
+<mat-datepicker #id></mat-datepicker>

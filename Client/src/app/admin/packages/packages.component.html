@@ -1,0 +1,28 @@
+﻿
+<div class="card" saveQuery>
+    <div class="card-header">
+        <h4 style="margin: 0px;">Packages</h4>
+    </div>
+    <div class="card-block">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="float-start">
+                    <my-search [search]="searchText" (searchChanged)="searchChanged($event)"></my-search>
+                </div>
+                <a class="btn btn-primary float-end" [routerLink]="['/admin/packages/add']"><fa-icon [icon]="['fas', 'plus']"></fa-icon> Package</a>
+            </div>
+        </div>
+        <div class="padded"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <my-grid [columns]="columns" [data]="items"
+                         [page]="config.page"
+                         [pageSize]="config.pageSize"
+                         (rowClicked)="getRow($event)" rowClass="btn-link"
+                         (btnClicked)="getBtn($event)"
+                         (pageChanged)="gridPageChange($event)"
+                         [collectionSize]="config.collectionSize"></my-grid>
+            </div>
+        </div>
+    </div>
+</div>

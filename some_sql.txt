@@ -1,0 +1,17 @@
+
+update inventory_items
+set Size = replace(Size,'Extra Small','XS')
+where inventoryid 
+in (select id from inventory.inventory where inventorytypeid = 8);
+
+The app is running on Digital Ocean
+PM2 is the app running and keeping it awake
+local MySQL
+Self Signed Certificates
+
+
+select i.Barcode, k.ModelName, i.Size, s.Name, k.cost
+from inventory_items i
+inner join inventory k on i.InventoryID = k.ID
+left join status_types s on i.StatusID = s.ID
+where s.name not in ( 'Available','Sold', 'Laundry', 'Damaged','Northshore' );

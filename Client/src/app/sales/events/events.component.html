@@ -1,0 +1,13 @@
+﻿<div class="container h-100 d-flex flex-column" saveQuery>
+    <div class="col-md-12">
+        <div class="float-start">
+            <h3>{{message}}</h3>
+        </div>
+        <a class="btn btn-link float-end" [routerLink]="['/sales/events/add']">Add Event</a>
+    </div>
+    <div class="flex-grow-1 mb-1">
+        <my-datagrid name="maingrid" [columns]="columns" [data]="items" [Tools]="[]"
+        (btnClicked)="getBtn($event)"
+         (rowClicked)="rowClick($event)"></my-datagrid>
+    </div>
+</div>

@@ -1,0 +1,268 @@
+﻿html{height: 100%;}
+body {
+    position: relative;
+    padding-top: 56px;
+    /*padding-bottom: 70px;*/
+    height: 100%;
+}
+
+.padded {
+    padding: 10px;
+}
+
+.affix.navbar-fixed-top {
+    top: 50px;
+}
+
+.affix.navbar-left {
+    top: 50px;
+}
+
+.affix.navbar-right {
+    top: 50px;
+}
+
+.loading {
+    z-index: 9999;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.loading {
+    text-align: center;
+    background: rgb(0,0,0);
+    background: rgba(0,0,0,.3);
+    // *background: transparent;
+}
+
+.loading .center {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 50%;
+}
+
+.loading img {
+    width: 5%;
+}
+
+/* alert layer */
+#alert-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+#alert-layer > .row:first-child {
+    padding-top: 55px;
+}
+
+.rotate {
+    -ms-transform: rotate(270deg); /* IE 9 */
+    -webkit-transform: rotate(270deg); /* Chrome, Safari, Opera */
+    transform: rotate(270deg);
+}
+
+
+/*input.ng-invalid {
+    border: 1px solid red;
+}
+textarea.ng-invalid {
+    border: 1px solid red;
+}
+select.ng-invalid {
+    border: 1px solid red;
+}*/
+
+.submitted input.ng-invalid {
+    border: 1px solid red;
+}
+
+.submitted textarea.ng-invalid {
+    border: 1px solid red;
+}
+.submitted select.ng-invalid {
+    border: 1px solid red;
+}
+
+.ettp-primary {
+    background-color: $ettp-primary;
+    border-color: $ettp-primary;
+    color: $ettp-compliment;
+}
+
+.ettp-secondary {
+    background-color: $ettp-secondary;
+    border-color: $ettp-secondary;
+    color: $ettp-compliment;
+}
+
+.ettp-text-primary {
+    color: $ettp-primary;
+}
+
+.ettp-text-compliment {
+    color: $ettp-compliment;
+}
+
+.ettp-seperate {
+    border-bottom-color: $ettp-compliment !important;
+    border-bottom: solid 3px;
+}
+
+.ettp-seperate-top {
+    border-top-color: $ettp-compliment !important;
+    border-top: solid 10px;
+}
+
+
+.ettp-pass {
+    background-color: $ettp-pass;
+    color: $ettp-secondary;
+}
+
+.ettp-fail {
+    color: $ettp-fail;
+}
+
+.not-round {
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+}
+
+
+.ettp-jumbo.jumbotron {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.jumbotron {
+    padding: 2rem 1rem;
+    margin-bottom: 1rem;
+    background-color: #e9ecef;
+    border-radius: .3rem;
+}
+.ettp-condensed-form .form-group {
+    margin-bottom: .1rem;
+}
+
+.unset-bottom {
+    margin-bottom: auto;
+}
+
+.centered-modal {
+    margin: auto;
+}
+
+/*@media (min-width: 1300px) {
+    .container {
+        width: 90%;
+        max-width: 95%;
+    }
+}*/
+
+.card-block {
+    padding: 20px;
+}
+
+.table-dark-header {
+    margin-top: 20px;
+    background-color: #ccc;
+    padding: 5px;
+}
+
+.btn-n-trans {
+    background-color: #e6e6e6;
+}
+
+.nav-item-header-padding {
+    padding-right: 3px;
+}
+
+.navbar .dropdown-menu {
+  /*  max-height: 650px;
+    overflow-y: auto;*/
+}
+
+.svg-checked, .svg-unchecked {
+    width: 0.875em;
+    display: inline-block;
+    font-size: inherit;
+    height: 1em;
+    overflow: visible;
+    vertical-align: -0.125em;
+}
+
+.validation-message {
+    font-size : smaller;
+}
+html.print-page, body.print-page {
+    background-color: #fafafa;
+    border-color: #fafafa;
+}
+html.print-page .hide-on-print, body.print-page .hide-on-print {
+    display: none !important;
+}
+@media (min-width: 570px) {
+    body.print-page .container {
+        width: 90%;
+        max-width: 95%;
+    }
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    /* IE10+ CSS styles go here */
+    .my-search.input-group{
+        width:200px !important;
+    }
+}
+
+@media print {
+    .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
+         float: left;
+    }
+    .col-sm-12 {
+         width: 100%;
+    }
+    .col-sm-11 {
+         width: 91.66666667%;
+    }
+    .col-sm-10 {
+         width: 83.33333333%;
+    }
+    .col-sm-9 {
+         width: 75%;
+    }
+    .col-sm-8 {
+         width: 66.66666667%;
+    }
+    .col-sm-7 {
+         width: 58.33333333%;
+    }
+    .col-sm-6 {
+         width: 50%;
+    }
+    .col-sm-5 {
+         width: 41.66666667%;
+    }
+    .col-sm-4 {
+         width: 33.33333333%;
+    }
+    .col-sm-3 {
+         width: 25%;
+    }
+    .col-sm-2 {
+         width: 16.66666667%;
+    }
+    .col-sm-1 {
+         width: 8.33333333%;
+    }
+    .hide-on-print {
+        display: none !important;
+    }
+ }

@@ -1,0 +1,45 @@
+﻿ <div class="input-group">
+    <div class="input-group-append">
+        <span class="input-group-text" style="padding:0px;">
+            <select class="form-controlz form-select" name="month" [(ngModel)]="month" (change)="onChange()">
+                <option *ngFor="let fy of months" [value]="fy">{{fy}}</option>
+            </select>
+        </span>
+    </div>
+    <div class="input-group-append">
+        <span class="input-group-text" style="padding:0px;">
+            <select class="form-controlz form-select" name="day" [(ngModel)]="day" (change)="onChange()">
+                <option *ngFor="let fy of days" [value]="fy">{{fy}}</option>
+            </select>
+        </span>
+    </div>
+    <div class="input-group-append">
+        <span class="input-group-text" style="padding:0px;">
+            <select class="form-controlz form-select" name="year" [(ngModel)]="year" (change)="onChange()">
+                <option *ngFor="let fy of years" [value]="fy">{{fy}}</option>
+            </select>
+        </span>
+    </div>
+
+    <div class="input-group-append">
+        <span class="input-group-text" style="padding:0px;"> - </span>
+    </div>
+
+    <div class="input-group-append">
+        <span class="input-group-text" style="padding:0px;">
+            <select class="form-controlz form-select" name="hour" [(ngModel)]="hour" (change)="onChange()">
+                <option *ngFor="let fy of hours" [value]="fy">{{fy | number:'2.0'}}</option>
+            </select>
+        </span>
+    </div>
+    <div class="input-group-append">
+        <span class="input-group-text" style="padding:0px;"> : </span>
+    </div>
+    <div class="input-group-append">
+        <span class="input-group-text" style="padding:0px;">
+            <select class="form-controlz form-select" name="minute" [(ngModel)]="minute" (change)="onChange()">
+                <option *ngFor="let fy of minutes" [value]="fy">{{fy | number:'2.0'}}</option>
+            </select>
+        </span>
+    </div>
+</div>

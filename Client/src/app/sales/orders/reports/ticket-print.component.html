@@ -1,0 +1,45 @@
+﻿
+<div id="ticketorder">
+    <div style="width:100%;font-weight: bolder; font-size: larger;" id="exportable">
+        <div class="alert alert-info d-print-none">
+            Use your browser's Print function, or key shortcuts, to Print
+        </div>
+        <div class="row" *ngIf="order">
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group row">
+                            <label class="col-sm-6 col-form-label">Name</label>
+                            <div class="col-sm-6">
+                                <span class=" form-control-plaintext">{{order.Customer?.FullName}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group row">
+                            <label class="col-sm-6 col-form-label">Event Date</label>
+                            <div class="col-sm-6">
+                                <span class=" form-control-plaintext">{{order.useDate | date}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group row">
+                            <label class="col-sm-6 col-form-label">Return Date</label>
+                            <div class="col-sm-6">
+                                <span class=" form-control-plaintext">{{order.returnDate | date}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <p>Late Fee $25 Per Day After Return Date</p>
+                        <p>Thank You For Your Business</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6"></div>
+        </div>
+    </div>
+</div>
+
+

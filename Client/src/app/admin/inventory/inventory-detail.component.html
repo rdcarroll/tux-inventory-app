@@ -1,0 +1,95 @@
+﻿
+<div class="padded"></div>
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="card" *ngIf="item">
+                <div class="card-header">
+                    <my-backbutton class="float-end" [link]="['/admin/inventory']"></my-backbutton>
+                    <h3><span>{{id==='add'?"Create":"Update"}} </span>Inventory</h3>
+                </div>
+                <div class="card-body">
+
+                    <form>
+                        <div class="form-group row mb-2">
+                            <label class="col-md-4 col-form-label">Model Name</label>
+                            <div class="col-md-8">
+                                <input class="form-control" name="ModelName" placeholder="" [(ngModel)]="item.ModelName" required>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-2">
+                            <label class="col-md-4 col-form-label">Inventory Type</label>
+                            <div class="col-md-8">
+                                <select class="form-controlz form-select" [(ngModel)]="item.InventoryTypeID" name="InventoryType" required>
+                                    <option *ngFor="let i of inventorytypes" [value]="i.ID">{{i.Name}}</option>
+                                 </select>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-2">
+                            <label class="col-md-4 col-form-label">Description</label>
+                            <div class="col-md-8">
+                                <input class="form-control" name="Description" placeholder="" [(ngModel)]="item.Description">
+                            </div>
+                        </div>
+                        <div class="form-group row mb-2">
+                            <label class="col-md-4 col-form-label">Cost</label>
+                            <div class="col-md-8">
+                                <input matInput class="form-control" name="Cost" type="text" placeholder="Item Cost"
+                                [ngModel]="item.Cost | currency:'USD':'symbol':'2.2'"
+                                [ngModelOptions]="{updateOn:'blur'}" (ngModelChange)="item.Cost=$event" />
+                                <!-- <input type="number" class="form-control" name="Cost" placeholder="" [(ngModel)]="item.Cost" required> -->
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="offset-sm-4 col-sm-8">
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-success" (click)="add()" *ngIf="id==='add'">Create Inventory</button>
+                                    <button type="button" class="btn btn-success" (click)="save()" *ngIf="id!='add'">Update Inventory</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                    <div class="row mt-2">
+                        <label class="col-md-4 col-form-label">Inventory Model Items
+                            <a class="btn btn-default btn-sm"
+                             routerLink="/admin/inventoryitems/add" 
+                             [queryParams]="{inventory_id:item.ID}">
+                             <fa-icon [icon]="['fas', 'plus']"></fa-icon>
+                            </a></label>
+                        
+                        <div class="col-md-8">
+                            <table class="table table-bordered table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>SKU</th>
+                                        <th>Size</th>
+                                        <th>Status</th>
+                                        <td></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of item.InventoryItems">
+                                        <td>{{item.Barcode}}</td>
+                                        <td>{{item.Size}}</td>
+                                        <td>{{item.Status.Name}}</td>
+                                        <td>
+                                            <a class="btn btn-primary btn-xs"
+                                            [routerLink]="['/admin/inventoryitems',item.ID]" 
+                                             [queryParams]="{inventory_id:item.ID}">
+                                             <fa-icon [icon]="['fas', 'edit']"></fa-icon>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

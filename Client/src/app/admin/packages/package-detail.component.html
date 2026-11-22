@@ -1,0 +1,72 @@
+﻿
+<div class="padded"></div>
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="card" *ngIf="item">
+                <div class="card-header">
+                    <my-backbutton class="float-end" [link]="['/admin/packages']"></my-backbutton>
+                    <h3><span>{{id==='add'?"Create":"Update"}} </span>Package</h3>
+                </div>
+                <div class="card-body">
+
+                    <form>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label">Name</label>
+                            <div class="col-md-8">
+                                <input class="form-control" name="name" placeholder="" [(ngModel)]="item.Name" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="offset-sm-4 col-sm-8">
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-success" (click)="add()" *ngIf="id==='add'">Create Package</button>
+                                    <button type="button" class="btn btn-success" (click)="save()" *ngIf="id!='add'">Update Package</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="row">
+                        <label class="col-md-4 col-form-label">Package Model Styles
+                            <a class="btn btn-default btn-sm"
+                             routerLink="/admin/packageinventory/add" 
+                             [queryParams]="{package_id:item.ID}">
+                             <fa-icon [icon]="['fas', 'plus']"></fa-icon>
+                            </a></label>
+                        
+                        <div class="col-md-8">
+                            <table class="table table-bordered table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Style</th>
+                                        <th>Description</th>
+                                        <th>Type</th>
+                                        <td></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let _item of item.PackageInventory">
+                                        <td>{{_item.Inventory.ModelName}}</td>
+                                        <td>{{_item.Inventory.Description}}</td>
+                                        <td>{{_item.Inventory.InventoryType.Name}}</td>
+                                        <td>
+                                            <a class="btn btn-primary btn-xs"
+                                            [routerLink]="['/admin/packageinventory',_item.ID]" 
+                                             [queryParams]="{inventory_id:_item.ID}">
+                                             <fa-icon [icon]="['fas', 'edit']"></fa-icon>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

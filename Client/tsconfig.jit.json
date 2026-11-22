@@ -1,0 +1,21 @@
+{
+  "extends":"./tsconfig.json",
+  "compilerOptions": {
+    "outDir":"../dist",
+    "baseUrl":"src",
+    "paths":{
+
+    }
+  },
+  "files": [
+    "src/main.jit.ts",
+    "src/polyfills.ts"
+  ],
+  "include": [
+    "./src/**/*.d.ts"
+  ],
+  "exclude": [
+   // "../../node_modules/*",
+    "./**/*.spec.ts"
+  ]
+}

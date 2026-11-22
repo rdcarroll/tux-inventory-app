@@ -1,0 +1,153 @@
+﻿
+<div id="itemevent">
+    <div style="width:670px;" id="exportable">
+    
+        
+<ng-container *ngIf="mode=='pull'">
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Pull items for Customer : {{order?.Customer?.FullName}} </h4>
+    </div>
+    <div class="modal-body">
+      <table class="table table-striped table-condensed">
+          <thead>
+            <tr>
+                <th>Type</th>
+                <th>Style</th>
+                <th>Description</th>
+                <th>Size</th>
+                <th>Pull Date</th>
+                <th>SKU</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of order_items">
+                <td>{{item.Inventory.InventoryType.Name}}</td>
+                <ng-container *ngIf="item.Inventory.ModelName!=='default'; else is_default">
+                  <td>{{item.Inventory.ModelName}}</td>
+                  <td>{{item.Inventory.Description}}</td>
+                  <td>{{item.ItemSize}}</td>
+                  <td>{{item.pulledDate | date}}</td>
+                  <td style="max-width: 100px;" *ngIf="!item.pulledDate"> <!-- (blur)="pullBlur(item,$event)" -->
+                    
+                    <div *ngIf="item.InventoryItem" >
+                        <ngx-barcode6 [bc-value]="item.InventoryItem.Barcode" [bc-display-value]="item.InventoryItem" [bc-height]="30"></ngx-barcode6>
+                      </div>
+                      <div *ngIf="item.notfound" class="text-alert">The barcode does not match an Inventory Item for the model and size selected, and has not been saved.</div>
+                  </td>
+                  <td *ngIf="item.pulledDate">
+                    <div *ngIf="item.InventoryItem?.Barcode" >
+                        <ngx-barcode6 [bc-value]="item.InventoryItem.Barcode" [bc-display-value]="item.InventoryItem.Barcode" [bc-height]="30"></ngx-barcode6>
+                      </div>
+                  </td>
+                </ng-container>
+                <ng-template #is_default>
+                  <td colspan="6">Inventory Model and Size not selected, yet</td>
+                </ng-template>
+            </tr>
+          </tbody>
+      </table>
+    </div>
+</ng-container>
+
+  
+<ng-container  *ngIf="mode=='pickup'">
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Pickup Order for Customer : {{order?.Customer?.FullName}} </h4>
+  </div>
+  <div class="modal-body">
+    <div>
+      <table class="table table-striped table-condensed">
+          <thead>
+            <tr>
+                <th>Type</th>
+                <th>Style</th>
+                <th>Description</th>
+                <th>Size</th>
+                <th>Pull Date</th>
+                <th>SKU</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of order_items">
+                <td>{{item.Inventory.InventoryType.Name}}</td>
+                <ng-container *ngIf="item.Inventory.ModelName!=='default'; else is_default">
+                  <td>{{item.Inventory.ModelName}}</td>
+                  <td>{{item.Inventory.Description}}</td>
+                  <td>{{item.ItemSize}}</td>
+                  <td>{{item.pulledDate | date}}</td>
+                  <td>
+                    <div *ngIf="item.InventoryItem" >
+                        <ngx-barcode6 [bc-value]="item.InventoryItem.Barcode" [bc-display-value]="item.InventoryItem" [bc-height]="30"></ngx-barcode6>
+                      </div>
+                  </td>
+                </ng-container>
+                <ng-template #is_default>
+                  <td colspan="5">Inventory Model and Size not selected, yet</td>
+                </ng-template>
+            </tr>
+          </tbody>
+      </table>
+    </div>
+  </div>
+</ng-container>
+  
+<ng-container *ngIf="mode=='return'">
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Return items for Customer : {{order?.Customer?.FullName}} </h4>
+    </div>
+    <div class="modal-body">
+      <div>
+        <table class="table table-striped table-condensed">
+            <thead>
+              <tr>
+                  <th>Type</th>
+                  <th>Style</th>
+                  <th>Description</th>
+                  <th>Size</th>
+                  <th>Pull Date</th>
+                  <th>Return Date</th>
+                  <th>SKU</th>
+                  <th>Return SKU</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of order_items">
+                  <td>{{item.Inventory.InventoryType.Name}}</td>
+                  <ng-container *ngIf="item.Inventory.ModelName!=='default'; else is_default">
+                    <td>{{item.Inventory.ModelName}}</td>
+                    <td>{{item.Inventory.Description}}</td>
+                    <td>{{item.ItemSize}}</td>
+                    <td>{{item.pulledDate | date}}</td>
+                    <td>{{item.returnedDate | date}}</td>
+                    <td>
+                        <div *ngIf="item.InventoryItem" >
+                            <ngx-barcode6 [bc-value]="item.InventoryItem.Barcode" [bc-display-value]="item.InventoryItem" [bc-height]="30"></ngx-barcode6>
+                          </div>
+                    </td>
+                    <td style="max-width: 100px;" *ngIf="!item.returnedDate || !item.pickedupDate">
+                        <div *ngIf="item.returnbarcode" >
+                            <ngx-barcode6 [bc-value]="item.returnbarcode" [bc-display-value]="item.returnbarcode" [bc-height]="30"></ngx-barcode6>
+                          </div>
+                        <div *ngIf="item.notfound" class="text-alert">The barcode does not match the Inventory Item checked out, and has not been saved.</div>
+                    </td>
+                    <td style="max-width: 200px;" *ngIf="item.returnedDate && item.pickedupDate">
+                    </td>
+                  </ng-container>
+                  <ng-template #is_default>
+                    <td colspan="6">Inventory Model and Size not selected, yet</td>
+                  </ng-template>
+              </tr>
+            </tbody>
+        </table>
+      </div>
+      
+      <ng-template #no_items_toreturn>
+        <div class="alert alert-info">Nothing to return. No items have been pulled or picked up, yet.</div>
+      </ng-template>
+    </div>
+  </ng-container>
+
+    </div>
+</div>
+
+

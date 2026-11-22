@@ -1,0 +1,45 @@
+﻿
+<app-jumbo [customTitle]="title" [unsetBottom]="true"></app-jumbo>
+
+<div class="container" *ngIf="!isWindows">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+                <h2>Please Login</h2>
+                <div class="form-group row">
+                    <input class="form-control mb-2" placeholder="UID" name="uid" [(ngModel)]="credentials.uid">
+                    <input type="password" class="form-control mb-2" placeholder="Password" name="pwd" [(ngModel)]="credentials.pwd">
+                </div>
+            <div class="d-grid gap-2">
+                <button class="btn btn-primary btn-block" type="button" (click)="login()">Login</button>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <!-- <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 text-center">
+            <p class="padded ettp-text-compliment"><button class="btn btn-link" (click)="forgotClicked()">Forgot Password?</button></p>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <div class="row" *ngIf="primaryemail">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 text-center">
+            <p class="padded ettp-text-compliment"><a class="padded ettp-text-compliment" href="mailto:{{primaryemail}}">Request Access</a></p>
+        </div>
+        <div class="col-md-4"></div>
+    </div> -->
+</div>
+
+<div class="container" *ngIf="isWindows">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 text-center">
+            <div>
+                <h3>Please Wait. Logging in...</h3>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>

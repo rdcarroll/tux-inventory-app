@@ -1,0 +1,70 @@
+﻿<div class="row padded">
+                                <div class="col-md-12">                       
+                                    <button class="btn btn-info space-left float-end" (click)="addItemClicked()">Add Item</button>
+                                </div>
+                            </div>
+                            <div style="min-height: 400px;">
+                                <table class="table table-striped table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th>Type</th>
+                                            <th>Style</th>
+                                            <th>Description</th>
+                                            <th>Size</th>
+                                            <th>Price</th>
+                                            <th>Pulled</th>
+                                            <th>Picked Up</th>
+                                            <th>Returned</th>
+                                            <th>Overbooked?</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                            <tr *ngFor="let item of orderitems">
+                                                <ng-container *ngIf="item.$$editing; else not_editing">
+                                                    <td colspan="10">
+                                                        <order-item-edit [item]="item" (itemChange)="save(item,$event)" (closeEdit)="btnClick(item,'close')"></order-item-edit>
+                                                    </td>
+                                                </ng-container>
+                                                <ng-template #not_editing>
+                                                    <td>{{item.Inventory.InventoryType.Name}}</td>
+                                                    <ng-container *ngIf="item.Inventory.ModelName=='default'; else not_default">
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td>{{item.Cost | currency}}</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </ng-container>
+                                                    <ng-template #not_default>
+                                                        <td>{{item.Inventory.ModelName}}</td>
+                                                        <td>{{item.Inventory.Description}}</td>
+                                                        <td>{{item.ItemSize}}</td>
+                                                        <td>{{item.Cost | currency}}</td>
+                                                        <td>{{item.pulledDate | date}}</td>
+                                                        <td>{{item.pickedupDate | date}}</td>
+                                                        <td>{{item.returnedDate | date}}</td>
+                                                        <td>
+                                                            <fa-icon *ngIf="item.overbooked" [icon]="['fas', 'check']" class="text-success" size="xs"></fa-icon>
+                                                        </td>
+                                                    </ng-template>
+                                                    <td style="width:105px;">
+                                                        <button class="btn btn-sm btn-outline-secondary" (click)="btnClick(item,'edit');">
+                                                            <fa-icon [icon]="['fas', 'edit']" class="text-info" size="xs" title="Edit"></fa-icon>
+                                                        </button>
+                                                        <button class="btn btn-sm btn-outline-secondary space-left" (click)="btnClick(item,'delete');" >
+                                                            <fa-icon [icon]="['fas', 'trash-alt']" class="text-danger" size="xs" title="Delete"></fa-icon>
+                                                        </button>
+                                                    </td>
+                                                </ng-template>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4" class="text-right">Total</td>
+                                                <td>{{total | currency}}</td>
+                                                <td colspan="5"></td>
+                                            </tr>
+                                    </tbody>
+                                </table> 
+                            </div>

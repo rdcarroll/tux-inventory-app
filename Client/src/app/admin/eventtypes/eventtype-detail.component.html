@@ -1,0 +1,37 @@
+﻿
+<div class="padded"></div>
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="card" *ngIf="item">
+                <div class="card-header">
+                    <my-backbutton class="float-end" [link]="['/admin/eventtypes']"></my-backbutton>
+                    <h3><span>{{id==='add'?"Create":"Update"}} </span>Event Type</h3>
+                </div>
+                <div class="card-body">
+
+                    <form>
+                        <div class="form-group row mb-2">
+                            <label class="col-md-4 col-form-label">Name</label>
+                            <div class="col-md-8">
+                                <input class="form-control" name="name" placeholder="" [(ngModel)]="item.Name" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="offset-sm-4 col-sm-8">
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-success" (click)="add()" *ngIf="id==='add'">Create Event Type</button>
+                                    <button type="button" class="btn btn-success" (click)="save()" *ngIf="id!='add'">Update Event Type</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,67 @@
+﻿
+<div class="padded"></div>
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="card" *ngIf="item">
+                <div class="card-header">
+                    <my-backbutton class="float-end" [link]="['/admin/employees']"></my-backbutton>
+                    <h3><span>{{id==='add'?"Create":"Update"}} </span>Employee</h3>
+                </div>
+                <div class="card-body">
+
+                    <form>
+                        <div class="form-group row mb-2">
+                            <label class="col-md-4 col-form-label">First Name</label>
+                            <div class="col-md-8">
+                                <input class="form-control" name="first" placeholder="" [(ngModel)]="item.FirstName" required>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-2">
+                            <label class="col-md-4 col-form-label">Last Name</label>
+                            <div class="col-md-8">
+                                <input class="form-control" name="last" placeholder="" [(ngModel)]="item.LastName" required>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-2">
+                            <label class="col-md-4 col-form-label">User Name</label>
+                            <div class="col-md-8">
+                                <input class="form-control" name="userid" placeholder="" [(ngModel)]="item.UserName" required>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-2">
+                            <label class="col-md-4 col-form-label">Email</label>
+                            <div class="col-md-8">
+                                <input class="form-control" name="email" placeholder="" [(ngModel)]="item.Email" required>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-2">
+                            <label class="col-md-4 col-form-label">Admin ?</label>
+                            <div class="col-md-8">
+                                <input type="checkbox"  name="IsAdmin" [(ngModel)]="item.IsAdmin" required>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-2" *ngIf="canSetPWD">
+                            <label class="col-md-4 col-form-label">Password</label>
+                            <div class="col-md-8">
+                                <input class="form-control" name="password" placeholder="" [(ngModel)]="pwd" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="offset-sm-4 col-sm-8">
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-success" (click)="add()" *ngIf="id==='add'">Create Employee</button>
+                                    <button type="button" class="btn btn-success" (click)="save()" *ngIf="id!='add'">Update Employee</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

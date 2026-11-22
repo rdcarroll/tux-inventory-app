@@ -1,0 +1,13 @@
+﻿
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><input type="checkbox" [ngModel]="check" (ngModelChange)="checkChanged($event)" style="width: 18px; height: 18px;" /></span>
+        </div>
+        <input matInput [matDatepicker]="id" placeholder="Choose a date..." class="form-control" [ngModel]="dateTime" (ngModelChange)="dateTimeChanged($event)"
+               [disabled]="readOnly" style="height:auto;border: 1px solid #ced4da;padding: .375rem .75rem; margin:0;" />
+        <div class="input-group-append">
+            <span class="input-group-text" style="padding:0px;"><mat-datepicker-toggle matSuffix [for]="id" [disabled]="readOnly"></mat-datepicker-toggle></span>
+        </div>
+    </div>
+
+<mat-datepicker #id></mat-datepicker>

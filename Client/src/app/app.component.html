@@ -1,0 +1,60 @@
+﻿<div class="h-100 d-flex flex-column">
+    <nav class="navbar navbar-expand-lg navbar-dark ettp-primary ettp-seperate fixed-top hide-on-print" id="mainmenu" *ngIf="canUse">
+        <div class="container">
+            <div class="navbar-header navbar-left">
+                <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed" data-toggle="collapse" data-target="#navbarTogglerMain" aria-controls="navbarTogglerMain" [attr.aria-expanded]="!isCollapsed" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                    <a class="navbar-brand"  routerLink="/landing">{{company?.Name}}</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarTogglerMain" [ngbCollapse]="isCollapsed">
+                <ul class="navbar-nav mr-auto navbar-right" *ngIf="canUse">
+                    <li class="nav-item" *ngFor="let nav of navs | myfilter : {condition:true}" [ngClass]="{'dropdown': nav.childnavs.length>0}" ngbDropdown (openChange)="menuclicked($event);">
+    
+                        <a *ngIf="nav.link!=null" class="nav-link" routerLink="{{nav.link}}" routerLinkActive="active" style="font-size: 0.9em;"><fa-icon *ngIf="nav.icon!=null" [icon]="nav.icon.split(' ')"></fa-icon> {{nav.display}}</a>
+    
+    
+                        <button *ngIf="nav.link==null" class="nav-link btn btn-link dropdown-toggle" id="navbarDropdownMenuLink" (click)="false;" style="font-size: 0.9em;" ngbDropdownToggle>
+                            <fa-icon *ngIf="nav.icon!=null" [icon]="nav.icon.split(' ')"></fa-icon> {{nav.display}}
+                        </button>
+                        <ul *ngIf="nav.link==null" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" ngbDropdownMenu>
+                            <li *ngFor="let snav of nav.childnavs | myfilter : {condition:true}">
+                                <div *ngIf="snav.link=='divider'" class="dropdown-divider"></div>
+                                <a *ngIf="snav.link!='divider'" class="dropdown-item" routerLink="{{snav.link}}" routerLinkActive="active"><fa-icon *ngIf="snav.icon!=null" [icon]="snav.icon.split(' ')"></fa-icon> {{snav.display}}</a>
+                            </li>
+                        </ul>
+    
+                    </li>
+                </ul>
+            </div>
+    
+        </div>
+    </nav>
+    
+    <div class="flex-grow-1" style="overflow-y: auto;">
+        <router-outlet></router-outlet>
+    </div>
+    
+    
+    <!--<nav class="navbar ettp-primary ettp-seperate-top fixed-bottom">
+        <div class="container">
+            <span class="ettp-text-compliment navbar-text">© 2020 - UCOR</span>
+        </div>
+    </nav>-->
+    
+    <nav class="navbar ettp-primary ettp-seperate-top hide-on-print">
+        <p *ngIf="company" style="font-size: 17px; padding-top: 0px; margin: 0px auto 20px auto; color: #bbb; text-align: center;">
+            For support please contact {{company.Name}}:<br/>
+            <!--<i class="fa fa-envelope icon-white"></i>-->
+            <fa-icon [icon]="['fas', 'envelope']"></fa-icon>
+            <a href="mailto:{{company.Email}}?subject={{company.Name}} Systems Support" style="color: #bbb;"> {{company.Name}} Systems Support</a> <br/>
+            Or the following phone number:<br/>
+            <fa-icon [icon]="['fas', 'phone-alt']"></fa-icon> {{company.Phone}} <br/>
+            {{company.Name}} V4.00
+        </p>
+    </nav>
+</div>
+
+
+<loading-spinner></loading-spinner>
+<app-alert></app-alert>

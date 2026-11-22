@@ -1,0 +1,96 @@
+﻿
+<div class="padded"></div>
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="card" *ngIf="item">
+                <div class="card-header">
+                    <my-backbutton class="float-end" [link]="['/sales/events']"></my-backbutton>
+                    <h3><span>{{adding?"Create":"Update"}} </span>Event</h3>
+                </div>
+                <div class="card-body">
+
+                    <form>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row mb-2">
+                                    <label class="col-md-4 col-form-label">Event Name</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control" name="first" placeholder="" [(ngModel)]="item.EventName" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-2">
+                                    <label class="col-md-4 col-form-label">Event Type</label>
+                                    <div class="col-md-8">
+                                        <select class="form-controlz form-select" [(ngModel)]="item.EventTypeID" name="EventType" required>
+                                            <option *ngFor="let i of eventtypes" [value]="i.ID">{{i.Name}}</option>
+                                         </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-2">
+                                    <label class="col-md-4 col-form-label">Event Date</label>
+                                    <div class="col-md-8">
+                                        <my-date [dateTime]="item.eventDate" (dateTimeChange)="eventDateChanged($event)" id="eventDate" name="eventDate"></my-date>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="!adding">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Orders
+                                        <a class="btn btn-default btn-sm"
+                                         routerLink="/sales/orders/add" 
+                                         [queryParams]="{event_id:item.ID}">
+                                         <fa-icon [icon]="['fas', 'plus']"></fa-icon>
+                                        </a>
+                                    </div>
+                                    <div class="card-body">
+                                        <table class="table table-condensed">
+                                            <thead>
+                                                <tr>
+                                                    <th>Order No.</th>
+                                                    <th>Customer Name</th>
+                                                    <th>Event Date</th>
+                                                    <th>Order Date</th>
+                                                    <th>Pickup Date</th>
+                                                    <th>Return Date</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <ng-container *ngFor="let order of item.Orders">
+                                                    <tr *ngFor="let ticket of order.OrderTickets">
+                                                        <td><a class="btn btn-link" [routerLink]="['/sales/orders/',order.ID]"  [queryParams]="{event_id:item.ID}">{{order.ID}}</a></td>
+                                                        <td>{{ticket.Customer.FullName }}</td>
+                                                        <td>{{order.useDate | date }}</td>
+                                                        <td>{{order.createdAt | date }}</td>
+                                                        <td>{{order.pickUpDate | date }}</td>
+                                                        <td>{{order.returnDate | date }}</td>
+                                                    </tr>
+                                                </ng-container>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="form-group row">
+                            <div class="offset-sm-4 col-sm-8">
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-success" (click)="add()" *ngIf="adding">Create Event</button>
+                                    <button type="button" class="btn btn-success" (click)="save()" *ngIf="!adding">Update Event</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

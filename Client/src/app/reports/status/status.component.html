@@ -1,0 +1,49 @@
+﻿
+<div class="container h-100 d-flex flex-column">
+    <h3>{{message}}</h3>
+    <div class="form-group row mb-2">
+        <label class="col-md-4 col-form-label">Item Status</label>
+        <div class="col-md-8">
+            <select class="form-controlz form-select" [(ngModel)]="status" (ngModelChange)="changeStatus($event)" name="StatusID" required >
+                <option *ngFor="let i of statuses" [value]="i.ID">{{i.Name}}</option>
+             </select>
+        </div>
+    </div>
+    <div class="flex-grow-1" style="overflow-y: auto;">
+        <my-datagrid name="maingrid" [columns]="columns" [data]="items" [Tools]="[]" (rowClicked)="rowClick($event)"></my-datagrid>
+    </div>
+    <!-- <div class="row h-100">
+
+        <div class="col-md-12 h-100">
+            <div class="card h-100 d-flex flex-column">
+                <div class="card-header">
+                    <h3>{{message}}</h3>
+                </div>
+                <div class="card-body flex-grow-1">
+                    <div class="h-100 d-flex flex-column">
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label">Item Status</label>
+                            <div class="col-md-8">
+                                <select class="form-control" [(ngModel)]="status" (ngModelChange)="changeStatus($event)" name="StatusID" required >
+                                    <option *ngFor="let i of statuses" [value]="i.ID">{{i.Name}}</option>
+                                 </select>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1" style="overflow-y: auto;">
+                            <table class="table table-bordered">
+                                <tr *ngFor="let item of items">
+                                    <td>{{item.Inventory?.InventoryType.Name}}</td>
+                                    <td>{{item.Inventory?.Description}}</td>
+                                    <td>{{item.Size}}</td>
+                                    <td>{{item.Barcode}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</div>
+
+

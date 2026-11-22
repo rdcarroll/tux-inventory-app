@@ -1,0 +1,66 @@
+﻿import { Component, OnDestroy } from '@angular/core';
+import { AgRendererComponent } from 'ag-grid-angular';
+import { ICellRendererParams } from "ag-grid-community";
+
+
+//<span * ngSwitchCase="'boolean'" >
+//    <fa-icon * ngIf="row[col.variable]"[icon] = "['fas', 'check']" class="text-success" size = "xs" > </fa-icon>
+//        < fa - icon * ngIf="!row[col.variable]"[icon] = "['fas', 'times']" class="text-danger" size = "xs" > </fa-icon>
+// < /span>
+
+@Component({
+  selector: 'boolean-renderer',
+    template: `
+        <span *ngIf='doshow'>
+        <fa-icon [icon]="['fas', btnicon]" [class]="btnclass" size="xs" [title]="btntext"></fa-icon>
+        </span>
+`,
+})
+export class BooleanRenderer implements AgRendererComponent {
+    params: ICellRendererParams;
+    btnicon: string = 'check';
+    btnclass: string = 'text-success';
+    btntext: string = 'True';
+    doshow: boolean = false;
+
+    // gets called once before the renderer is used
+    agInit(params: ICellRendererParams): void|null {
+        if (!params.data && !params.colDef?.showRowGroup) return null;
+        this.doshow = true;
+        this.params = params;
+        //this.params.value = params.value ?? 0;
+        switch (this.params.value) {
+            case 0:
+            case false:
+            case "N":
+                this.btnicon = 'times';
+                this.btnclass = 'text-danger';
+                this.btntext = 'False';
+                break;
+            case 1:
+            case true:
+            case "Y":
+                this.btnicon = 'check';
+                this.btnclass = 'text-success';
+                this.btntext = 'True';
+                break;
+            default:
+                this.btnicon = 'question';
+                this.btnclass = 'text-warning';
+                this.btntext = 'UnDetermined';
+
+        }
+    }
+
+    // gets called whenever the cell refreshes
+    refresh(params: ICellRendererParams): boolean {
+        // set value into cell again
+        this.params = params;
+        return true;
+    }
+
+    ngOnDestroy() {
+        // no need to remove the button click handler 
+        // https://stackoverflow.com/questions/49083993/does-angular-automatically-remove-template-event-listeners
+    }
+}

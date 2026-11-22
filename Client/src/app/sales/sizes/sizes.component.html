@@ -1,0 +1,127 @@
+﻿
+<div>
+    <button type="button" class="btn btn-success" (click)="size(edittemplate)">Customer Sizes</button>
+</div>
+
+<ng-template #edittemplate>
+ 
+    <div class="modal-header p-2">
+      <h4 class="modal-title pull-leftz">Sizes for Customer : {{customer.FullName}} </h4>
+      <button type="button" class="btn-close pull-rightz" aria-label="Close" (click)="dialogRef.close()">
+        <!-- <span aria-hidden="true">&times;</span> -->
+      </button>
+    </div>
+    <div class="modal-body p-3">
+      <div class="row mb-2">
+          <div class="col-md-6">
+              <div class="form-group row">
+                  <label class="col-md-4 col-form-label">Coat</label>
+                  <div class="col-md-8">
+                      <input class="form-control" name="Coat" placeholder="" [(ngModel)]="customer_size.Coat" required autofocus>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-6">
+              <div class="form-group row">
+                  <label class="col-md-4 col-form-label">Shirt</label>
+                  <div class="col-md-8">
+                      <input class="form-control" name="Shirt" placeholder="" [(ngModel)]="customer_size.Shirt" required>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="row mb-2">
+          <div class="col-md-6">
+              <div class="form-group row">
+                  <label class="col-md-4 col-form-label">Pants</label>
+                  <div class="col-md-8">
+                      <input class="form-control" name="Pants" placeholder="" [(ngModel)]="customer_size.Pants" required>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-6">
+              <div class="form-group row">
+                  <label class="col-md-4 col-form-label">Waist</label>
+                  <div class="col-md-8">
+                      <input class="form-control" name="Waist" placeholder="" [(ngModel)]="customer_size.Waist" required>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="row mb-2">
+          <div class="col-md-6">
+              <div class="form-group row">
+                  <label class="col-md-4 col-form-label">Vest</label>
+                  <div class="col-md-8">
+                      <input class="form-control" name="Vest" placeholder="" [(ngModel)]="customer_size.Vest" required>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-6">
+              <div class="form-group row">
+                  <label class="col-md-4 col-form-label">Tie</label>
+                  <div class="col-md-8">
+                      <input class="form-control" name="Tie" placeholder="" [(ngModel)]="customer_size.Tie" required>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="row mb-2">
+          <div class="col-md-6">
+              <div class="form-group row">
+                  <label class="col-md-4 col-form-label">Shoe</label>
+                  <div class="col-md-8">
+                      <input class="form-control" name="Shoe" placeholder="" [(ngModel)]="customer_size.Shoe" required>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-6">
+              <div class="form-group row">
+                  <label class="col-md-4 col-form-label">Height</label>
+                  <div class="col-md-8">
+                      <input class="form-control" name="Height" placeholder="" [(ngModel)]="customer_size.Height" required>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="row mb-2">
+          <div class="col-md-6">
+              <div class="form-group row">
+                  <label class="col-md-4 col-form-label">Chest</label>
+                  <div class="col-md-8">
+                      <input class="form-control" name="Chest" placeholder="" [(ngModel)]="customer_size.Chest" required>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-6">
+              <div class="form-group row">
+                  <label class="col-md-4 col-form-label">Neck</label>
+                  <div class="col-md-8">
+                      <input class="form-control" name="Neck" placeholder="" [(ngModel)]="customer_size.Neck" required>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="row mb-2">
+          <div class="col-md-6">
+              <div class="form-group row">
+                  <label class="col-md-4 col-form-label">Sleeve</label>
+                  <div class="col-md-8">
+                      <input class="form-control" name="Sleeve" placeholder="" [(ngModel)]="customer_size.Sleeve" required>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-6">
+            
+          </div>
+      </div>
+      <div class="form-group row">
+          <div class="offset-sm-4 col-sm-8">
+              <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-success" (click)="add()" *ngIf="!customer_size.ID">Create Sizes</button>
+                  <button type="button" class="btn btn-success" (click)="save()" *ngIf="customer_size.ID">Update Sizes</button>
+              </div>
+          </div>
+      </div>
+    </div>
+  </ng-template>

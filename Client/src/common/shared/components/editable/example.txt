@@ -1,0 +1,51 @@
+﻿import { Component, OnInit } from '@angular/core';
+import { Building } from '../sitedata';
+import { ApiClientService } from '../../common/services/api-client.service';
+import { Util } from '../../common/services/util.service';
+import { finalize } from 'rxjs/operators';
+import { FormArray, FormGroup, FormControl, Validators } from '@angular/forms';
+
+@Component({
+    selector: 'my-buildings',
+    templateUrl: './buildings.component.html'
+})
+export class BuildingsComponent implements OnInit {
+    selectedItem: Building;
+    items: Building[];
+    controls: FormArray;
+    config: Config;
+
+    constructor(
+        private ApiClient: ApiClientService,
+        private util: Util
+    ) {
+  ...
+    }
+    getControls(): void {
+        const toGroups = this.items.map(entity => {
+            return new FormGroup({
+                name: new FormControl(entity.BuildingName, Validators.required),
+                description: new FormControl(entity.Building_Description)
+            });
+        });
+        this.controls = new FormArray(toGroups);
+    }
+
+    getControl(index: number, field: string): FormControl {
+        return this.controls.at(index).get(field) as FormControl;
+    }
+
+...
+    
+}
+
+
+
+                    <td>
+                        <editable (update)="updateField(index, 'name')">
+                            <ng-template viewMode>{{item.BuildingName}}</ng-template>
+                            <ng-template editMode>
+                                <input [formControl]="getControl(index, 'name')">
+                            </ng-template>
+                        </editable>
+                    </td>

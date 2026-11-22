@@ -1,0 +1,70 @@
+﻿<div class="container h-100 d-flex flex-column" saveQuery>
+    <div class="col-md-12">
+        <div class="float-start">
+                    <h3>Update Company Info</h3>
+        </div>
+    </div>
+    <div class="flex-grow-1 mb-1" style="overflow-y: auto;">
+ 
+                    <form>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label">Name</label>
+                            <div class="col-md-8">
+                                <input class="form-control" name="name" placeholder="" [(ngModel)]="item.Name" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label">Phone</label>
+                            <div class="col-md-8">
+                                <input class="form-control" name="Phone" placeholder="" [(ngModel)]="item.Phone" >
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label">Email</label>
+                            <div class="col-md-8">
+                                <input class="form-control" name="email" placeholder="" [(ngModel)]="item.Email" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label">Address</label>
+                            <div class="col-md-8">
+                                <input class="form-control" name="address" placeholder="" [(ngModel)]="item.Address" >
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label">City</label>
+                            <div class="col-md-8">
+                                <input class="form-control" name="city" placeholder="" [(ngModel)]="item.City" >
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label">State</label>
+                            <div class="col-md-8">
+                                <input class="form-control" name="state" placeholder="" [(ngModel)]="item.State" >
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label">Tax Rate</label>
+                            <div class="col-md-8">
+                                <input type="number" class="form-control" name="tax" placeholder="" [(ngModel)]="item.TaxRate" >
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label">Message</label>
+                            <div class="col-md-8">
+                                <textarea type="text" class="form-control" name="message" rows="10"
+                                placeholder="Message for Ticket" [(ngModel)]="item.Message" ></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group row mt-2">
+                            <div class="offset-sm-4 col-sm-8">
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-success" (click)="save()">Update Info</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+    </div>
+</div>
+

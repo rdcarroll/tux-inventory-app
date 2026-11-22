@@ -1,0 +1,18 @@
+﻿
+<div class="my-money input-group">
+    <input matInput class="form-control" type="text" [(ngModel)]="moneyText" [placeholder]="placeholder" /> <!-- (keyup)="changeMoney()" -->
+        <button class="btn btn-outline-secondary" (click)="changeMoney();">
+            <fa-icon [icon]="['fas', 'check']"></fa-icon>
+        </button>
+        <button class="btn btn-outline-secondary" (click)="moneyText='0.00';changeMoney();">
+            <fa-icon [icon]="['fas', 'times']"></fa-icon>
+        </button>
+    <!-- <div class="input-group-append">
+    </div> -->
+</div>
+
+
+
+<!-- <input matInput class="form-control" name="Adjustment" type="text" placeholder="discounts, etc."
+[ngModel]="adjustment | currency:'USD':'symbol':'2.2'"
+[ngModelOptions]="{updateOn:'blur'}" (ngModelChange)="adjustmentChanged($event)" /> -->

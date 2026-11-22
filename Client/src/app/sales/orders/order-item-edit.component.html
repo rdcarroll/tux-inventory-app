@@ -1,0 +1,51 @@
+﻿<div class="row"><div class="col-md-12 padded">
+    <div class="btn-group1 float-end" role="group1">
+        <button (click)="save()" class="btn btn-success btn-sm">Save</button>
+        <button (click)="close()" class="btn btn-info btn-sm space-left">Close</button>
+    </div>
+</div></div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group row">
+            <label class="col-md-4 col-form-label">Type</label>
+            <div class="col-md-8">
+                <select class="form-controlz form-select" [(ngModel)]="invtypeid" (ngModelChange)="changeInventoryType($event,false)" name="InventoryTypeID" required >
+                    <option *ngFor="let i of inventory_types" [value]="i.ID">{{i.Name}}</option>
+                 </select>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="form-group row">
+            <label class="col-md-2 col-form-label">Model</label>
+            <div class="col-md-10">
+                <my-typeahead [(myModel)]="invmodelid"  (myModelChange)="changeInventory($event,false)" [searchField]="'ModelWDesc'" [options]="inventory" [valueField]="'ID'" [displayField]="'ModelWDesc'"></my-typeahead>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group row">
+            <label class="col-md-4 col-form-label">Size</label>
+            <div class="col-md-8">
+               <mat-select class="form-controlz form-select" placeholder="Item Size" [(ngModel)]="itemsize" (ngModelChange)="changeInventoryItem()" name="ItemSize" required>
+                        <mat-option *ngFor="let i of inventory_itemsizes" [value]="i.ItemSize">
+                            <p [ngClass]="{'text-danger':i.overbooked,'text-success':!i.overbooked}">{{i.ItemSize}}</p>
+                        </mat-option>
+                      </mat-select>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="form-group row">
+            <label class="col-md-2 col-form-label">Price</label>
+            <div class="col-md-4">
+                                <!-- <input matInput class="form-control" name="Cost" type="text" placeholder="Item Cost"
+                                [ngModel]="price | currency:'USD':'symbol':'2.2'"
+                                [ngModelOptions]="{updateOn:'blur'}" (ngModelChange)="price=$event" /> -->
+                                <my-money [money]="price" (moneyChange)="price=$event"></my-money>
+            </div>
+        </div>
+    </div>
+</div>

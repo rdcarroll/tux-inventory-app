@@ -1,0 +1,81 @@
+﻿
+<div class="padded"></div>
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="card" *ngIf="item">
+                <div class="card-header">
+                    <my-backbutton class="float-end" [link]="backto"></my-backbutton>
+                    <h3><span>{{id==='add'?"Create":"Update"}} </span>Inventory Item</h3>
+                </div>
+                <div class="card-body">
+
+                    <form>
+                        <div class="form-group row mb-2">
+                            <label class="col-md-4 col-form-label">Inventory Model</label>
+                            <div class="col-md-8">
+                                <my-typeahead [(myModel)]="item.InventoryID"
+                                [options]="inventories" [valueField]="'ID'" [displayField]="'ModelWDesc'"></my-typeahead>
+                                <!-- <select class="form-control" [(ngModel)]="item.InventoryID" name="Inventory" required [disabled]="inventory_id!=null">
+                                    <option *ngFor="let i of inventories" [value]="i.ID">{{i.ModelName}} ({{i.InventoryType.Name}})</option>
+                                 </select> -->
+                            </div>
+                        </div>
+                        <div class="form-group row mb-2">
+                            <label class="col-md-4 col-form-label">Current Status</label>
+                            <div class="col-md-8">
+                                <select class="form-controlz form-select" [(ngModel)]="item.StatusID" name="StatusType" required>
+                                    <option *ngFor="let i of statuses" [value]="i.ID">{{i.Name}}</option>
+                                 </select>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-2">
+                            <label class="col-md-4 col-form-label">Size</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" name="Size" placeholder="" [(ngModel)]="item.Size" required>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-2">
+                            <label class="col-md-4 col-form-label">Barcode</label>
+                            <div class="col-md-8">
+                                <!-- <input type="text" class="form-control" name="Barcode" placeholder="" [(ngModel)]="item.Barcode" required> -->
+                                <my-barcode [(barcode)]="item.Barcode" [name]="'Barcode'"></my-barcode>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-2">
+                            <label class="col-md-4 col-form-label">Serial Number</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" name="SerialNumber" placeholder="" [(ngModel)]="item.SerialNumber" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="offset-sm-4 col-sm-8">
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-success" (click)="add()" *ngIf="id==='add'">Create Inventory Item</button>
+                                    <button type="button" class="btn btn-success" (click)="save()" *ngIf="id!='add'">Update Inventory Item</button>
+                                    <button type="button" class="btn btn-success" (click)="getItemActions()" *ngIf="id!='add'">View History</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #dialogRef let-data>
+ <div class="p-5">
+    Historical Actions for this Inventory Item
+    <table class="table table-bordered">
+        <tr *ngFor="let item of data.actionitems">
+            <td>{{item.createdAt |  date: "short"}}</td>
+            <td>{{item.Action.Name}}</td>
+        </tr>
+    </table>
+</div>
+</ng-template>
+
+

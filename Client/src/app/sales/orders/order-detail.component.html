@@ -1,0 +1,124 @@
+﻿
+<div class="padded"></div>
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="card" *ngIf="order">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-6">                
+                            <h3>
+                                <span *ngIf="id==='add'">Create Order</span>
+                                <span *ngIf="id!='add'">Order {{order.ID}} {{order.Customer.FullName}}</span>
+                            </h3>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="button" class="btn btn-info float-end space-left" (click)="print(id)" *ngIf="id!='add'">Open Printable Ticket in a New Window</button>
+                            <my-backbutton class="float-end" [link]="backto"></my-backbutton>
+                        </div>
+                    </div>
+                        <div class="row table-dark-header">
+                            <div class="col-md-12">
+                                <a class="btn btn-success float-end space-left" [routerLink]="['/admin/inandout']">In and Out (Laundry)</a>
+                                <my-inandout *ngIf="id!='add'" class="float-end space-left" [orderid]="order.ID" [mode]="'return'" (closeEdit)="close()"></my-inandout>
+                                <my-inandout *ngIf="id!='add'" class="float-end space-left" [orderid]="order.ID" [mode]="'pickup'" (closeEdit)="close()"></my-inandout>
+                                <my-inandout *ngIf="id!='add'" class="float-end space-left" [orderid]="order.ID" [mode]="'pull'" (closeEdit)="close()"></my-inandout>
+                            </div>
+                        </div>
+                </div>
+                <div class="card-body">
+                    <mat-tab-group  mat-stretch-tabs="false" mat-align-tabs="start" dynamicHeight>
+                        <mat-tab label="Order">
+                            <div class="col-md-12">
+                                <form #orderForm="ngForm">
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row mb-2">
+                                                <label class="col-md-4 col-form-label">Order Number</label>
+                                                <div class="col-md-8">
+                                                    <span class=" form-control-plaintext">{{id!='add' ? order.ID : "TBD"}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row mb-2">
+                                                <label class="col-md-4 col-form-label">Created On</label>
+                                                <div class="col-md-8">
+                                                    <my-date [dateTime]="order.createdAt"  id="createdAt" name="createdAt" [readOnly]=true></my-date>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row mb-2">
+                                                <label class="col-md-4 col-form-label">Customer Name</label>
+                                                <div class="col-md-8">
+                                                    <!-- [disabled]="id!='add'" -->
+                                                    <!-- <select class="form-control" [(ngModel)]="order.CustomerID" name="CustomerId" required >
+                                                        <option *ngFor="let i of customers" [value]="i.ID">{{i.FullName}}</option>
+                                                     </select> -->
+                                                     <my-typeahead [(myModel)]="order.CustomerID" [options]="customers" [valueField]="'ID'" [displayField]="'FullName'"></my-typeahead>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row mb-2">
+                                                <label class="col-md-4 col-form-label">Event Name</label>
+                                                <div class="col-md-8">
+                                                     <my-typeahead [(myModel)]="order.EventID" (myModelChange)="eventChanged($event)" [options]="events" [valueField]="'ID'" [displayField]="'EventName'"></my-typeahead>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group row mb-2">
+                                                <label class="col-md-4 col-form-label">Use Date</label>
+                                                <div class="col-md-8">
+                                                    <my-date [dateTime]="order.useDate" (dateTimeChange)="useDateChanged($event)" id="useDate" name="useDate"></my-date>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row mb-2">
+                                                <label class="col-md-4 col-form-label">Pick Up Date</label>
+                                                <div class="col-md-8">
+                                                    <my-date [(dateTime)]="order.pickUpDate" id="pickUpDate" name="pickUpDate"></my-date>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row mb-2">
+                                                <label class="col-md-4 col-form-label">Return Date</label>
+                                                <div class="col-md-8">
+                                                    <my-date [(dateTime)]="order.returnDate" id="returnDate" name="returnDate"></my-date>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="form-group row">
+                                                <label class="col-md-4 col-form-label">Actual Return Date</label>
+                                                <div class="col-md-8">
+                                                    <my-date [dateTime]="order.actualReturnDate" (dateTimeChange)="actualReturnDateChanged($event)" id="actualReturnDate" name="actualReturnDate"></my-date>
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                    </div>
+            
+                                    <div class="form-group row">
+                                        <div class="offset-sm-4 col-sm-8">
+                                            <div class="btn-group" role="group">
+                                                <button type="button" class="btn btn-success" (click)="add(orderForm)" *ngIf="id==='add'">Create Order</button>
+                                                <button type="button" class="btn btn-success" (click)="save(orderForm)" *ngIf="id!='add'">Update Order</button>
+                                                <button type="button" class="btn btn-info" (click)="printTicket(id)" *ngIf="id!='add'">Print Ticket</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Items" [disabled]="id==='add'">
+                            <div class="col-md-12">
+                                <order-items [order]="order" (listChange)="listChange($event)"></order-items>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Ticket" [disabled]="id==='add'"> 
+                            <div class="col-md-12">
+                                <order-ticket [order]="order" (ticketChange)="listChange($event)"></order-ticket>
+                            </div>
+                        </mat-tab>
+                      </mat-tab-group>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

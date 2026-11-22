@@ -1,0 +1,152 @@
+﻿
+<div class="padded"></div>
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="card" *ngIf="item">
+                <div class="card-header">
+                    <my-backbutton class="float-end" [link]="['/sales/customers']"></my-backbutton>
+                    <h4><span>{{id==='add'?"Create":"Update"}} </span>Customer</h4>
+                </div>
+                <div class="card-body">
+
+                    <form>
+                        <div class="row mb-2">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">First Name</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control" name="first" placeholder="" [(ngModel)]="item.FirstName" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">Last Name</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control" name="last" placeholder="" [(ngModel)]="item.LastName" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">Phone</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control" name="Phone" placeholder="" [(ngModel)]="item.Phone" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">Email</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control" name="Email" placeholder="" [(ngModel)]="item.Email" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">Address</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control" name="Address" placeholder="" [(ngModel)]="item.Address" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label"></label>
+                                    <div class="col-md-8">
+                                        <my-sizes *ngIf="item.ID" class="float-end space-left" [customerid]="item.ID" (closeEdit)="close()"></my-sizes>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-2" *ngIf="item.OrderTickets">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Tickets
+                                    </div>
+                                    <div class="card-body">
+                                        <table class="table table-condensed">
+                                            <thead>
+                                                <tr>
+                                                    <th>Ticket</th>
+                                                    <th>Order No.</th>
+                                                    <th>Date</th>
+                                                    <th>Total</th>
+                                                    <th>Balance</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let ticket of item.OrderTickets">
+                                                    <td><a class="btn btn-link" [routerLink]="['/sales/orders/',ticket.OrderID]"  [queryParams]="{customer_id:item.ID}">{{ticket.ID}}</a></td>
+                                                    <td>{{ticket.OrderID }}</td>
+                                                    <td>{{ticket.createdAt | date }}</td>
+                                                    <td>{{ticket.Total | currency:'USD':'symbol':'2.2'  }}</td>
+                                                    <td>{{ticket.Balance | currency:'USD':'symbol':'2.2'  }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Orders
+                                        <a class="btn btn-default btn-sm"
+                                         routerLink="/sales/orders/add" 
+                                         [queryParams]="{customer_id:item.ID}">
+                                         <fa-icon [icon]="['fas', 'plus']"></fa-icon>
+                                        </a>
+                                    </div>
+                                    <div class="card-body">
+                                        <table class="table table-condensed">
+                                            <thead>
+                                                <tr>
+                                                    <th>Order No.</th>
+                                                    <th>Created Date</th>
+                                                    <th>Use Date</th>
+                                                    <th>Pickup Date</th>
+                                                    <th>Return Date</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let order of item.Orders">
+                                                    <td><a class="btn btn-link" [routerLink]="['/sales/orders/',order.ID]"  [queryParams]="{customer_id:item.ID}">{{order.ID}}</a></td>
+                                                    <td>{{order.createdAt | date }}</td>
+                                                    <td>{{order.useDate | date }}</td>
+                                                    <td>{{order.pickUpDate | date }}</td>
+                                                    <td>{{order.returnDate | date }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="offset-sm-4 col-sm-8">
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-success" (click)="add()" *ngIf="id==='add'">Create Customer</button>
+                                    <button type="button" class="btn btn-success" (click)="save()" *ngIf="id!='add'">Update Customer</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

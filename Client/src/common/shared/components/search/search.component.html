@@ -1,0 +1,9 @@
+﻿
+<div class="my-search input-group" [ngClass]="{'input-group-sm': size === 'sm'}">
+    <input class="form-control" type="text" (keyup)="changeSearch()" [(ngModel)]="searchText" [placeholder]="placeholder" />
+    <div class="input-group-append">
+        <button class="btn btn-outline-secondary" (click)="searchText='';changeSearch();">
+            <fa-icon [icon]="['fas', 'times']"></fa-icon>
+        </button>
+    </div>
+</div>

@@ -1,0 +1,107 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "expense-tracker": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "../dist",
+            "deployUrl": "dist/",
+            "index": {
+              "input":"src/index.html",
+              "output":"index.html"
+            },
+            "main": "src/main.aot.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.aot.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "src/assets/images/icon-favicon-20.jpg",
+              "src/assets/images/CorpLog2.jpg",
+              {
+                "glob": "_redirects",
+                "input": "src/assets",
+                "output": "/"
+              } 
+            ],
+            "styles": [
+              "src/assets/css/custom.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+              "local":{
+                  "buildOptimizer": false,
+                  "optimization": false,
+                  "vendorChunk": true,
+                  "extractLicenses": false,
+                  "sourceMap": true,
+                  "namedChunks": true,
+                  "main":"src/main.jit.ts",
+                  "polyfills":"src/polyfills.ts",
+                  "tsConfig":"tsconfig.jit.json"
+              },
+            "development": {
+                  "buildOptimizer": true,
+                  "optimization": true,
+                  "vendorChunk": false,
+                  "extractLicenses": true,
+                  "sourceMap": false,
+                  "namedChunks": false,
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
+            },
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "3mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+                  "buildOptimizer": true,
+                  "optimization": true,
+                  "vendorChunk": false,
+                  "extractLicenses": true,
+                  "sourceMap": false,
+                  "namedChunks": false,
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.production.ts"
+                }
+              ]              
+            }
+          },
+          "defaultConfiguration": "production"
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": false
+  }
+}

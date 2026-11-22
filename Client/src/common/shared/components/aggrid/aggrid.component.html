@@ -1,0 +1,55 @@
+﻿
+
+<div class="ag-theme-balham" style="background-color: #f8f8f8; border: solid 1px; border-color: #babfc7;" *ngIf="Tools.length>0">
+    <button *ngIf="Tools.indexOf('Refresh') > -1" class="btnz btn-sm btn-outline-info m-1" (click)="onBtnRefresh()">
+        <fa-icon [icon]="['fas','redo']" style="color: DeepSkyBlue;"></fa-icon> Refresh
+    </button>
+    <button *ngIf="Tools.indexOf('Excel') > -1" class="btnz btn-sm btn-outline-success m-1" (click)="onBtnExportExcel()">
+        <fa-icon [icon]="['fas','file-excel']" style="color: SeaGreen;"></fa-icon> Export Excel
+    </button>
+    <button *ngIf="Tools.indexOf('CSV') > -1" class="btnz btn-sm btn-outline-warning m-1" (click)="onBtnExportCSV()">
+        <fa-icon [icon]="['fas','file-csv']" style="color: Wheat;"></fa-icon> Export CSV
+    </button>
+    <button *ngIf="Tools.indexOf('Word') > -1" class="btnz btn-sm btn-outline-primary m-1" (click)="onBtnExportWord()">
+        <fa-icon [icon]="['fas','file-word']" style="color: RoyalBlue;"></fa-icon> Export Word
+    </button>
+    <button *ngIf="Tools.indexOf('FloatingFilters') > -1" class="btnz btn-sm btn-outline-info m-1" (click)="onBtnFloatingFilters()">
+        <fa-icon [icon]="['fas','filter']" style="color: MediumSpringGreen; "></fa-icon> Floating Filters
+    </button>
+    <button *ngIf="Tools.indexOf('MyFilters') > -1" class="btnz btn-sm btn-outline-info m-1" (click)="onBtnMyFilters()">
+        <fa-icon [icon]="['fas','filter']" style="color: CadetBlue;"></fa-icon> My Filters
+    </button>
+    <!--<div class="dropdown m-1" *ngIf="Tools.indexOf('MyFilters') > -1" ngbDropdown>
+        <button type="button" class="btn btn-secondary dropdown-toggle" ngbDropdownToggle aria-expanded="false" data-offset="10,20">
+            <fa-icon [icon]="['fas','filter']" style="color: CornflowerBlue;"></fa-icon> My Filters
+        </button>
+        <div class="dropdown-menu" ngbDropdownMenu>
+            <my-savefilter [reportname]='reportname' [config]='config' (profileChange)='changeFilter($event)'></my-savefilter>
+        </div>
+    </div>-->
+</div>
+<ag-grid-angular style="width: 100%;" [style.height]="Tools.length>0 ? 'calc(100% - 40px)' : '100%'"
+             class="ag-theme-alpine"
+             [defaultColDef]="defaultColDef"
+             [columnTypes]="columnTypes"
+             [columnDefs]="columnDefs"
+             [rowData]="rowData"
+
+             [rowClassRules]="rowClassRules"
+             [components]="frameworkComponents"
+    [statusBar]="statusBar"
+             [singleClickEdit]="true"
+             [maintainColumnOrder]="true"
+             [rowSelection]="'single'"
+             [editType]="'fullRow'"
+             [stopEditingWhenCellsLoseFocus]="true"
+             (gridReady)="onGridReady($event)"
+             (columnEverythingChanged)="onColumnEverythingChanged($event)"
+             (firstDataRendered)="onFirstDataRendered($event)"
+             (modelUpdated)="modelUpdated($event)"
+             (rowSelected)="onRowSelected($event)"
+             (cellValueChanged)="onCellValueChanged($event)"
+             (rowValueChanged)="onRowValueChanged($event)"
+             (filterChanged)="onFilterChanged($event)"
+                 >
+</ag-grid-angular>
